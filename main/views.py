@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 def show_main(request):
     context = {
-        'card_name': 'VStar Arceus',
-        'type': 'Legendary'
+        'name': 'Tegar Wahyu Khisbulloh',
+        'class': 'PBP F'
     }
 
     return render(request, "main.html", context)
