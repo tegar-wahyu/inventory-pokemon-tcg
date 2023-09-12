@@ -1,8 +1,83 @@
-<h1>Pokemon TCG Inventory</h1>
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Red's Inventory</title>
+<link rel = "icon" href = "https://www.serebii.net/pokemonsleep/items/pokebiscuit.png" type = "image/x-icon">
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+<style>
+    body {
+        font-family: "Press Start 2P", cursive;
+        font-size: small;
+        background-color: #FFFFFF;
+        color: #3d3c3c;
+    }
 
-<h5>Name: </h5>
-<p>{{ name }}</p>
-<h5>Amount: </h5>
-<p>{{ amount }}</p> 
-<h5>Description: </h5>
-<p>{{ description }}</p>
+    .title {
+        text-align: center;
+        font-size: 25px;
+        font-weight: bold;
+        font-family: "Press Start 2P", cursive;
+        font-palette: #3d3c3c;
+        color: #3d3c3c;
+        background-color: #FFFFFF;
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
+
+<head>
+    <div class = "title">
+        <h1>Red's Inventory</h1>
+    </div>
+</head>
+
+<body>
+    <!-- simple table to show poke ball inventory -->
+    <table align="center" border="1px" style="width:1400px; line-height:30px;">
+        <tr>
+            <th colspan="3"><h2>Poke Balls</h2></th>
+            <th colspan="3"><h2>Medicines</h2></th>
+        </tr>
+        <t>
+            <th width="200px">Name</th>
+            <th width="100px">Amount</th>
+            <th width="400px">Description</th>
+            <th width="200px">Name</th>
+            <th width="100px">Amount</th>
+            <th width="400px">Description</th>
+        </t>
+        <tr>
+            <td>{{ pokeBallsPocket.pokeBalls.name }}</td>
+            <td align="center">{{ pokeBallsPocket.pokeBalls.amount }}</td>
+            <td>{{ pokeBallsPocket.pokeBalls.description }}</td>
+
+            <td>{{ medicinesPocket.potion.name }}</td>
+            <td align="center">{{ medicinesPocket.potion.amount }}</td>
+            <td>{{ medicinesPocket.potion.description }}</td>
+        </tr>
+        <tr>
+            <td>{{ pokeBallsPocket.greatBalls.name }}</td>
+            <td align="center">{{ pokeBallsPocket.greatBalls.amount }}</td>
+            <td>{{ pokeBallsPocket.greatBalls.description }}</td>
+
+            <td>{{ medicinesPocket.superPotion.name }}</td>
+            <td align="center">{{ medicinesPocket.superPotion.amount }}</td>
+            <td>{{ medicinesPocket.superPotion.description }}</td>
+        </tr>
+        <tr>
+            <td>{{ pokeBallsPocket.ultraBalls.name }}</td>
+            <td align="center">{{ pokeBallsPocket.ultraBalls.amount }}</td>
+            <td>{{ pokeBallsPocket.ultraBalls.description }}</td>
+
+            <td>{{ medicinesPocket.hyperPotion.name }}</td>
+            <td align="center">{{ medicinesPocket.hyperPotion.amount }}</td>
+            <td>{{ medicinesPocket.hyperPotion.description }}</td>
+        </tr>
+    </table>
+
+    <!-- button to go to about -->
+    <div style="text-align: center; margin: 10px; padding: 10px;">
+        <a href="about.html"><button font="Press Start 2P" style="font-family: 'Press Start 2P', cursive; font-size: 15px;">About</button></a>
+    </div>
+</body>
+</html>
