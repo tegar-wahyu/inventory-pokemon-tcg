@@ -97,6 +97,7 @@ urlpatterns = [
 ### Deployment 
 - Dalam tahap ini saya perlu Sign In ke dalam website adaptable dan menghubungkan repository yang telah saya buat. Kemudian menyesuaikan beberapa hal yang diminta oleh Adaptable seperti `deployment branch, template deployment, tipe basis data, dan start command`.
 - Kemudian saya melakukan deployment dengan menekan `Deploy App`
+![appimage](app.png)
 
 ### Membuat README.md 
 - Dalam pembuatan versi terbaru aplikasi saya ini, terdapat kendala deployment yaitu pemblokiran akun oleh Adaptable sehingga tidak bisa menambahkan link untuk menuju ke dalam aplikasi saya.
@@ -169,4 +170,4 @@ Perbedaannya:
         self.assertEqual(field_label, 'name')
 ```
 - Untuk menjalankan tes tersebut bisa dilakukan dengan command `python manage.py test`
-![Alt text](test.png)
+![test](test.png)
