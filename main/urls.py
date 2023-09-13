@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import homepage, about
+from main.views import homepage
 
 app_name = 'main'
 
