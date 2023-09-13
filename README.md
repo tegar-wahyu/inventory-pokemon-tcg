@@ -152,3 +152,21 @@ Perbedaannya:
 - MVC adalah pola desain yang digunakan terutama dalam pengembangan software desktop dan web tradisional. Memiliki Controller yang mengendalikan alur aplikasi.
 - MVT mirip dengan MVC, tetapi dalam konteks Django, Template (yang menggantikan Controller) digunakan untuk menentukan cara data disajikan dalam HTML.
 - MVVM adalah pola desain yang digunakan dalam aplikasi berbasis interface pengguna yang lebih kompleks, terutama dalam pengembangan aplikasi seluler dan aplikasi dengan tampilan dinamis. Menggunakan ViewModel untuk mengelola data yang ditampilkan di View, memungkinkan tampilan untuk berubah otomatis sesuai dengan perubahan data pada Model, sehingga membuat aplikasi lebih reaktif dan mudah diuji.
+
+## Bonus
+- Saya menambahkan beberapa tes dalam `test.py` untuk Model dan response:
+```python
+    # test_pokeball_item: memastikan bahwa item pokeball ada
+    def test_pokeball_item(self):
+        pokeBall = Item.objects.create(name='Pokeball', amount=10, description='Pokeball is a ball')
+        field_label = pokeBall._meta.get_field('name').verbose_name
+        self.assertEqual(field_label, 'name')
+
+    # test_medicine_item: memastikan bahwa item medicine ada
+    def test_medicine_item(self):
+        pokeBall = Item.objects.create(name='Potion', amount=10, description='Potion is a medicine')
+        field_label = pokeBall._meta.get_field('name').verbose_name
+        self.assertEqual(field_label, 'name')
+```
+- Untuk menjalankan tes tersebut bisa dilakukan dengan command `python manage.py test`
+![Alt text](test.png)
