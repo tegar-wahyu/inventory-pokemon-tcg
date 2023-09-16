@@ -1,0 +1,65 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<title>Add Item</title>
+<head>
+    <div class = "title">
+        <h1>Add Item</h1>
+    </div>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-container">
+        <div class="input">
+            <label for="name">Name</label>
+            <br>
+            {{ form.name }}
+            <br>
+            <label for="amount">Amount</label>
+            <br>
+            {{ form.amount }}
+            <br>
+            <label for="description">Description</label>
+            <br>
+            {{ form.description }}
+            <br>
+            <div>
+                <button class="button"> Add Item </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+</head>
+<style>
+    .input {
+        margin: auto;
+        box-sizing: border-box;
+    }
+
+    .input label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+
+    .input input[type=text], input[type=number], textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+        background-color: #9f9f9f;
+    }
+
+    .form-container {
+        max-width: 300px;
+        width: 100%;
+        padding: 20px;
+        background-color: white;
+        margin: auto;
+        border: 10px solid #3d3c3c;
+    }
+</style>
+{% endblock %}

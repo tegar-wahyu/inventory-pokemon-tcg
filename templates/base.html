@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<link rel = "icon" href = "https://www.serebii.net/pokemonsleep/items/pokebiscuit.png" type = "image/x-icon">
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        {% block meta %}
+        {% endblock meta %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
+
+<style>
+    body {
+        font-family: "Press Start 2P", cursive;
+        font-size: small;
+        background-color: #FFFFFF;
+        color: #3d3c3c;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 20px;
+        font-family: "Press Start 2P", cursive;
+        font-palette: #3d3c3c;
+        background-color: #FFFFFF;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .button {
+        background: #7C7C7C;
+        border-bottom: 6px inset rgba(0,0,0,.5);
+        border-left: 6px inset rgba(0,0,0,.5);
+        border-right: 6px inset rgba(255,255,255,.5);
+        border-top: 6px inset rgba(255,255,255,.5);
+        box-sizing: border-box;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 10px;
+        font-family: "Press Start 2P", cursive;
+        font-palette: # ;
+        margin: 10px;
+        min-width: 150px;
+        padding: 10px;
+        text-transform: uppercase;
+        width: auto;
+        
+        &:focus,
+        &:hover {
+		    background: #BCBCBC;
+        }
+    }
+</style>
