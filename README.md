@@ -1,8 +1,10 @@
 https://red-s-inventory.adaptable.app/
 
-Nama    : Tegar Wahyu Khisbulloh
-NPM     : 2206082032
-Kelas   : PBP F
+Nama    : Tegar Wahyu Khisbulloh <br>
+NPM     : 2206082032 <br>
+Kelas   : PBP F <br>
+
+# TUGAS 2
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
@@ -99,14 +101,14 @@ urlpatterns = [
 ### Deployment 
 - Dalam tahap ini saya perlu Sign In ke dalam website adaptable dan menghubungkan repository yang telah saya buat. Kemudian menyesuaikan beberapa hal yang diminta oleh Adaptable seperti `deployment branch, template deployment, tipe basis data, dan start command`.
 - Kemudian saya melakukan deployment dengan menekan `Deploy App`
-![appimage](app.png)
+![appimage](images/app.png)
 
 ### Membuat README.md 
 - Dalam pembuatan versi terbaru aplikasi saya ini, terdapat kendala deployment yaitu pemblokiran akun oleh Adaptable sehingga tidak bisa menambahkan link untuk menuju ke dalam aplikasi saya.
 
 
 ## Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas `html`.
-![Bagan MVT](image.png)
+![Bagan MVT](images/bagan.png)
 
 - `urls.py` adalah tempat untuk mendefinisikan rute rute aplikasi pada proyek Django. Ada 2 `urls.py` :
 1. `urls.py` pada proyek Django, berfungsi sebagai penghubung rute dasar dengan rute yang didefinisikan pada `urls.py` pada direktori app
@@ -172,4 +174,292 @@ Perbedaannya:
         self.assertEqual(field_label, 'name')
 ```
 - Untuk menjalankan tes tersebut bisa dilakukan dengan command `python manage.py test`
-![test](test.png)
+![test](images/test.png)
+
+-----
+# TUGAS 3
+
+##  1. Apa perbedaan antara form `POST` dan form `GET` dalam Django?
+<table>
+  <tr>
+    <th>POST</th>
+    <th>GET</th>
+  </tr>
+  <tr>
+    <td>Data/value tidak terlihat di URL</td>
+    <td>Data/value terlihat di URL</td>
+  </tr>
+  <tr>
+    <td>Paramater tidak tersimpan di web browser history</td>
+    <td>Paramater tersimpan di web browser history</td>
+  </tr>
+  <tr>
+  <td>Digunakan untuk meng-handle request yang bisa digunakan untuk mengubah keadaan sistem</td>
+  <td>Digunakan untuk meng-handle request yang tidak mengubah keadaan sistem</td>
+  </tr>
+</table>
+
+## 2. Apa perbedaan utama antara `XML`, `JSON`, dan `HTML` dalam konteks pengiriman data?
+<table style="width:100%">
+  <tr>
+    <th>XML</th>
+    <td>
+    - Digunakan secara luas dalam berbagai aplikasi, termasuk pertukaran data antar sistem, konfigurasi, dan penyimpanan data yang sangat struktural.
+    <br>
+    - Lebih kompleks daripada JSON dan HTML karena memungkinkan definisi aturan dan struktur yang lebih kustom.</td>
+  </tr>
+  <tr>
+    <th>JSON</th>
+    <td>
+    - Mendukung struktur data yang lebih sederhana daripada XML dan biasanya digunakan untuk pertukaran data di aplikasi web dan layanan web (API).
+    <br>
+    - Format penukaran data ringan yang mudah dibaca oleh manusia dan mudah diurai mesin.
+    </td>
+  </tr>
+  <tr>
+    <th>HTML</th>
+    <td>
+    - Tidak dirancang untuk pertukaran data seperti XML dan JSON.
+    <br>
+    - Digunakan untuk mengatur tampilan dan struktur halaman web, termasuk teks, gambar, tautan, formulir, dan elemen-elemen lainnya.
+    </td>
+  </tr>
+</table>
+
+## 3. Mengapa `JSON` sering digunakan dalam pertukaran data antara aplikasi web modern?
+Karena JSON memiliki beberapa keunggulan yang membuatnya cocok untuk digunakan dalam pertukaran data antar aplikasi web. 
+<br> 
+Keunggulan tersebut antara lain:
+1. JSON memiliki syntax yang sederhana dan mudah dibaca. 
+2. JSON adalah format data yang ringan dan memiliki overhead yang minim. Ini berarti data JSON dapat dikirim dan diterima dengan cepat melalui jaringan, mengurangi latensi.
+3. JSON sering digunakan dalam API berbasis REST (Representational State Transfer) yang banyak digunakan dalam pengembangan web modern. API REST menggunakan JSON untuk mengirim dan menerima data, memungkinkan aplikasi berkomunikasi dengan mudah.
+
+## 4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+### - [ ] Membuat input `form` untuk menambahkan objek model pada app sebelumnya.
+1. Membuat file `forms.py` dan menambahkan kode sebagai berikut:
+```python
+from django.forms import ModelForm
+from main.models import Item
+
+class ItemForm(ModelForm):
+    class Meta:
+        model = Item
+        fields = ["name", "amount", "description"]
+```
+2. Menambahkan import yang dibutuhkan ke dalam `views.py`
+```python
+from django.http import HttpResponseRedirect # import untuk redirect ke halaman lain
+from main.forms import ItemForm # Import ItemForm yang ada di dalam `forms.py`
+from django.urls import reverse # # Import untuk kembali ke halaman utama
+```
+
+3. Menambahkan method baru dalam `views.py` untuk menghandle request menambahkan item
+```python
+def add_item(request):
+    form = ItemForm(request.POST or None)
+    
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:homepage'))
+
+    context = {'form': form}
+    return render(request, "add_item.html", context)
+```
+
+4. Meng-update method homepage dalam `views.py` untuk 
+```python
+def homepage(request):
+    items = Item.objects.all() # Query semua item dari database
+    context = {
+        'name' : 'Tegar Wahyu Khisbulloh',
+        'class' : 'PBP F',
+        'items': items 
+        }
+    return render(request, "main.html", context)
+```
+
+5. Import method `add_item` tadi ke `urls.py`
+```python
+from main.views import homepage, add_item
+```
+Tambahkan path url `add_item` ke `urlpatterns`
+```python
+urlpatterns = [
+..
+path('add_item', add_item, name='add_item'),
+...
+]
+```
+6. Membuat file HTML `add_item.html` dalam direktori `main/templates` untuk menampilkan interface add_item
+```HTML
+{% extends 'base.html' %} 
+
+{% block content %}
+<title>Add Item</title>
+<head>
+    <div class = "title">
+        <h1>Add Item</h1>
+    </div>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-container">
+        <div class="input">
+            {{ form.as_table }}
+        </div>
+        <button class="button">
+            Add Item
+        </button>
+    </div>
+</form>
+
+</head>
+<style>
+    .input {
+        margin: auto;
+        box-sizing: border-box;
+    }
+    
+    .input label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+    
+    .input input[type=text], input[type=number], textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+        background-color: #9f9f9f;
+    }
+    
+    .form-container {
+        max-width: 300px;
+        width: 100%;
+        padding: 20px;
+        background-color: white;
+        margin: auto;
+        border: 10px solid #3d3c3c;
+    }
+</style>
+{% endblock content %}
+```
+
+7. Menyesuaikan tampilan `main.html`
+```HTML
+<body>
+    <!-- Jika tidak ada item, sembunyikan tabel -->
+    {% if items %}
+    <table align="center" border="1px" style="width:1400px; line-height:30px;">
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date Added</th>
+        </tr>
+
+        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.date_added }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <br />
+
+    <div align="center">
+        <a href="{%url 'main:add_item' %}">
+            <button class="button">
+                Add Item
+            </button>
+        </a>
+
+        <!-- Jika tidak ada item, sembunyikan button clear items -->
+        {% if items %}
+        <a href="{%url 'main:clear_items' %}">
+            <button class="button">
+                Clear Item
+            </button>
+        </a>
+        {% endif %}
+
+    </div>
+</body>
+```
+
+### - [ ] Tambahkan 5 fungsi `views` untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML *by ID*, dan JSON *by ID*.
+1. Menambahkan beberapa import yang dibutuhkan terlebih dahulu
+```python
+from django.http import HttpResponse # import HttpResponse untuk menampilkan response
+from django.core import serializers # import serializers untuk mengubah data menjadi json atau xml
+```
+2. Menambahkan fungsi `show_xml`, `show_json`, `show_xml_by_id`, `show_json_by_id`. (Fungsi untuk menampilkan data dalam format html sudah dibuat yaitu fungsi `homepage`)
+```python
+def show_xml(request):
+    # Mengambil semua data dari database
+    data = Item.objects.all() 
+    # Mengembalikan response berupa XML
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml") 
+def show_json(request):
+    # Mengambil semua data dari database
+    data = Item.objects.all()
+    # Mengembalikan response berupa JSON
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def show_xml_by_id(request, id):
+    # Mengambil semua data dari database berdasarkan ID
+    data = Item.objects.filter(pk=id)
+    # Mengembalikan response berupa XML
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json_by_id(request, id):
+  # Mengambil semua data dari database berdasarkan ID
+    data = Item.objects.filter(pk=id)
+    # Mengembalikan response berupa JSON
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+### - [ ] Membuat routing URL untuk masing-masing `views` yang telah ditambahkan pada poin 2.
+
+1. Import 5 fungsi yang telah dibuat ke `urls.py` 
+```python
+from main.views import homepage, add_item, clear_items, show_xml, show_json, show_xml_by_id, show_json_by_id 
+```
+2. Menambahkan pattern url untuk masing-masing fungsi dalam variabel `urlpatterns`
+```python
+urlpatterns = [
+    ...
+    path('', homepage, name='homepage'), # HTML
+    path('xml/', show_xml, name='show_xml'), # XML
+    path('json/', show_json, name='show_json'), # JSON
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'), XML by ID
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), JSON by ID
+    ...
+]
+```
+
+## Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam `README.md`.
+1. HTML
+![html](images/html.png)
+2. XML
+![xml](images/xml.png)
+3. JSON
+![json](images/json.png)
+4. XML by ID
+![xml_by_id](images/xml_by_id.png)
+5. JSON by ID
+![json_by_id](images/json_by_id.png)
+
+## BONUS: Menambahkan pesan "Kamu menyimpan X item pada aplikasi ini"
+Menambahkan baris kode berikut ke dalam `main.html`
+```HTML
+<h3 align="center">You have {{ items|length }} item(s) in your inventory</h3>
+```

@@ -10,12 +10,14 @@
 </head>
 
 <body>
+    <h3 align="center">You have {{ items|length }} item(s) in your inventory</h3>
+    <!-- Jika tidak ada item, sembunyikan tabel -->
     {% if items %}
-    <table align="center" border="1px" style="width:1400px; line-height:30px;">
+    <table align="center" border="1px" style="width: auto; line-height:30px;">
         <tr>
             <th>Name</th>
             <th>Amount</th>
-            <th>Description</th>
+            <th style="width: 700px">Description</th>
             <th>Date Added</th>
         </tr>
 
@@ -40,7 +42,7 @@
             </button>
         </a>
 
-        <!-- if theres no item, the clear button will not appear -->
+        <!-- Jika tidak ada item, sembunyikan button clear items -->
         {% if items %}
         <a href="{%url 'main:clear_items' %}">
             <button class="button">
