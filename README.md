@@ -440,8 +440,8 @@ urlpatterns = [
     path('', homepage, name='homepage'), # HTML
     path('xml/', show_xml, name='show_xml'), # XML
     path('json/', show_json, name='show_json'), # JSON
-    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'), XML by ID
-    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), JSON by ID
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'), # XML by ID
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), # JSON by ID
     ...
 ]
 ```
