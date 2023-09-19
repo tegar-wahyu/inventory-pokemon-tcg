@@ -236,7 +236,7 @@ Keunggulan tersebut antara lain:
 
 ## 4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
-### - [ ] Membuat input `form` untuk menambahkan objek model pada app sebelumnya.
+###  Membuat input `form` untuk menambahkan objek model pada app sebelumnya.
 1. Membuat file `forms.py` dan menambahkan kode sebagai berikut:
 ```python
 from django.forms import ModelForm
@@ -396,7 +396,7 @@ path('add_item', add_item, name='add_item'),
 </body>
 ```
 
-### - [ ] Tambahkan 5 fungsi `views` untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML *by ID*, dan JSON *by ID*.
+###  Tambahkan 5 fungsi `views` untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML *by ID*, dan JSON *by ID*.
 1. Menambahkan beberapa import yang dibutuhkan terlebih dahulu
 ```python
 from django.http import HttpResponse # import HttpResponse untuk menampilkan response
@@ -427,7 +427,7 @@ def show_json_by_id(request, id):
     # Mengembalikan response berupa JSON
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 ```
-### - [ ] Membuat routing URL untuk masing-masing `views` yang telah ditambahkan pada poin 2.
+###  Membuat routing URL untuk masing-masing `views` yang telah ditambahkan pada poin 2.
 
 1. Import 5 fungsi yang telah dibuat ke `urls.py` 
 ```python
