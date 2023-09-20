@@ -257,14 +257,14 @@ from django.urls import reverse # # Import untuk kembali ke halaman utama
 3. Menambahkan method baru dalam `views.py` untuk menghandle request menambahkan item
 ```python
 def add_item(request):
-    form = ItemForm(request.POST or None)
+    form = ItemForm(request.POST or None) # Membuat form baru
     
-    if form.is_valid() and request.method == "POST":
-        form.save()
-        return HttpResponseRedirect(reverse('main:homepage'))
+    if form.is_valid() and request.method == "POST": # Jika form valid dan method POST
+        form.save() # Simpan form
+        return HttpResponseRedirect(reverse('main:homepage')) # Redirect ke homepage
 
-    context = {'form': form}
-    return render(request, "add_item.html", context)
+    context = {'form': form} # Buat context
+    return render(request, "add_item.html", context) # Render add_item.html dengan context yang sudah dibuat
 ```
 
 4. Meng-update method homepage dalam `views.py` untuk 
