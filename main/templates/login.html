@@ -17,19 +17,14 @@
             <div class="form-container">
                 <div class="input">
                     <table>
-                        <tr>
-                            <td>Username: </td>
-                            <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-                        </tr>
-                                
-                        <tr>
-                            <td>Password: </td>
-                            <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-                        </tr>
-                        <!-- columnspan 2-->
-                        <tr>
-                            <td colspan="2"><input class="button" type="submit" value="Login"></td>
-                        </tr>
+                        <tr>Username: </tr>
+                        <tr><input type="text" name="username" placeholder="Username" class="form-control"></tr>
+                        <tr>Password: </tr>
+                        <br>
+                        <tr><input type="password" name="password" placeholder="Password" class="form-control"></tr>
+                        <div style="width: 50%; margin: 0 auto;">
+                            <input class="button" type="submit" value="Login">
+                        </div>
                     </table>
                 </div>
             </div>
@@ -41,10 +36,23 @@
                     <li>{{ message }}</li>
                 {% endfor %}
             </ul>
-        {% endif %}     
-            
-        Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
-
+        {% endif %}  
+        <div class="footer">
+            <h2>Don't have an account yet?</h2>    
+            <a href="{% url 'main:register' %}">Register Now</a>
+        </div>   
     </div>
 </body>
+
+<style>
+    .footer {
+        text-align: center;
+        font-size: 10px;
+        font-family: "Press Start 2P", cursive;
+        font-palette: #3d3c3c;
+        background-color: #FFFFFF;
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
 {% endblock content %}

@@ -5,11 +5,12 @@
 <head>
     <div class = "title">
         <h1>Red's Inventory</h1>
-        <h5>by: Tegar Wahyu Khisbulloh PBP F</h5>
+        <h5>by: Tegar Wahyu Khisbulloh {{ class }}</h5>
     </div>
 </head>
 
 <body>
+    <h3 align="center">Welcome, {{ user.username }}!</h3>
     <h3 align="center">You have {{ items|length }} item(s) in your inventory</h3>
     <!-- Jika tidak ada item, sembunyikan tabel -->
     {% if items %}
@@ -29,6 +30,13 @@
             <td>{{ item.amount }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.date_added }}</td>
+            <td>        
+                <a href="{% url 'main:change_item_amount' item.id 'increase' %}"><button type="submit" class="button small">+</button></a>
+                <a href="{% url 'main:change_item_amount' item.id 'decrease' %}"><button type="submit" class="button small">-</button></a>
+            </td>
+            <td>
+                <a href="{% url 'main:delete_item' item.id %}"><button type="submit" class="button">Delete</button></a>
+            </td>
         </tr>
         {% endfor %}
     </table>
@@ -36,29 +44,11 @@
     <br />
 
     <div align="center">
-        <a href="{%url 'main:add_item' %}">
-            <button class="button">
-                Add Item
-            </button>
-        </a>
-
-        <!-- Jika tidak ada item, sembunyikan button clear items -->
-        {% if items %}
-        <a href="{%url 'main:clear_items' %}">
-            <button class="button">
-                Clear Item
-            </button>
-        </a>
-        {% endif %}
-
+        <a href="{%url 'main:add_item' %}"><button class="button">Add Item</button></a>
+        <a href="{%url 'main:logout' %}"><button class="button">Logout</button></a>
     </div>
 
     <div align="center">
-        <a href="{%url 'main:logout' %}">
-            <button class="button">
-                Logout
-            </button>
-        </a>
         <h5>Sesi terakhir login: {{ last_login }}</h5>
     </div>
 

@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login')
 def homepage(request):
-    items = Item.objects.all()
+    items = Item.objects.filter(user=request.user)
     context = {
         'name' : request.user.username,
         'class' : 'PBP F',
@@ -69,9 +69,22 @@ def add_item(request):
     context = {'form': form}
     return render(request, "add_item.html", context)
 
-def clear_items(request):
-    Item.objects.all().delete()
-    return HttpResponseRedirect(reverse('main:homepage'))
+def change_item_amount(request, item_id, amount):
+    item = Item.objects.get(id=item_id)
+
+    if item.amount <= 0 and amount == 'decrease':
+        return redirect('main:homepage')
+    if amount == 'increase':
+        item.amount += 1
+    elif amount == 'decrease':
+        item.amount -= 1
+    item.save()
+    return redirect('main:homepage')
+
+def delete_item(request, item_id):
+    item = Item.objects.get(id=item_id)
+    item.delete()
+    return redirect('main:homepage')
 
 def show_xml(request):
     data = Item.objects.all() 
