@@ -10,16 +10,18 @@
 </head>
 
 <body>
-    <h3 align="center">Welcome, {{ user.username }}!</h3>
-    <h3 align="center">You have {{ items|length }} item(s) in your inventory</h3>
+    <h5 align="center">Welcome, {{ user.username }}!</h3>
+    <h5 align="center">You have {{ items|length }} item(s) in your inventory</h3>
     <!-- Jika tidak ada item, sembunyikan tabel -->
+    <div class="card">
     {% if items %}
-    <table align="center" border="1px" style="width: auto; line-height:30px;">
+    <table align="center" border="1px" style="width: 80%; line-height:30px;">
         <tr>
             <th>Name</th>
             <th>Amount</th>
-            <th style="width: 700px">Description</th>
+            <th>Description</th>
             <th>Date Added</th>
+            <th colspan="2">Edit</th>
         </tr>
 
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
@@ -42,7 +44,7 @@
     </table>
     {% endif %}
     <br />
-
+    </div>
     <div align="center">
         <a href="{%url 'main:add_item' %}"><button class="button">Add Item</button></a>
         <a href="{%url 'main:logout' %}"><button class="button">Logout</button></a>
@@ -51,7 +53,6 @@
     <div align="center">
         <h5>Sesi terakhir login: {{ last_login }}</h5>
     </div>
-
 </body>
 </html>
 {% endblock content %}

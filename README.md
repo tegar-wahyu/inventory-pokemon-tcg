@@ -885,3 +885,311 @@ urlspatterns = [
     ...
 ]
 ```
+
+# TUGAS 5
+## Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
+### 1. Tag Selector (tagname):
+**Manfaat**: Tag selector digunakan untuk memilih semua elemen dengan tag yang sama. Ini berguna untuk menerapkan gaya yang seragam ke semua elemen dengan tag yang sama, seperti mengatur properti teks untuk semua elemen. <br>
+**Waktu untuk menggunakan**: Ketika ingin menerapkan style global pada elemen-elemen dengan tag yang sama dalam seluruh halaman web. <br>
+**Contoh**:
+
+```css
+p {
+  color: #333;
+  font-size: 16px;
+
+}
+```
+
+### 2. Class Selector (.classname): 
+**Manfaat**: Class selector digunakan untuk memilih elemen berdasarkan kelas yang telah ditetapkan untuk elemen tersebut. Ini memungkinkan kita untuk menerapkan style yang spesifik hanya pada elemen-elemen yang memiliki kelas tertentu. <br>
+**Waktu untuk menggunakan**: Saat ingin menerapkan style yang sama pada beberapa elemen yang memiliki kelas yang sama atau serupa. <br>
+Contoh:
+
+```css
+Copy code
+.button {
+  background-color: #007bff;
+  color: #fff;
+}
+```
+### 3. ID Selector (#idname):
+**Manfaat**: ID selector digunakan untuk memilih elemen berdasarkan ID yang unik. ID harus unik dalam satu halaman, sehingga berguna untuk menerapkan style atau fungsi yang sangat spesifik pada elemen tertentu. <br>
+**Waktu untuk menggunakan**: Saat menerapkan gaya atau perilaku yang sangat spesifik pada satu elemen dalam halaman. <br>
+Contoh:
+
+```css
+Copy code
+#header {
+  font-size: 24px;
+  text-align: center;
+}
+```
+
+### 4. Universal Selector (*):
+
+**Manfaat**: Universal selector memilih semua elemen dalam halaman. <br>
+**Waktu untuk menggunakan**: Digunakan hanya jika diperlukan dalam situasi khusus, seperti mereset gaya default untuk semua elemen.<br>
+Contoh:
+
+```css
+Copy code
+* {
+  margin: 0;
+  padding: 0;
+}
+```
+
+### 5. Pseudo-class Selector (:pseudo-class):
+
+**Manfaat**: Pseudo-class selector digunakan untuk memilih elemen berdasarkan keadaan atau interaksi pengguna, seperti `:hover`, `:active`, atau `:focus`. Ini berguna untuk mengubah tampilan elemen saat user berinteraksi dengan elemen.
+**Waktu untuk menggunakan**: Saat ingin membuat respons perubahan keadaan elemen oleh pengguna.
+Contoh:
+
+``` css
+a:hover {
+  color: #ff0000;
+}
+```
+## Jelaskan HTML5 Tag yang kamu ketahui.
+1. `<header>` - digunakan untuk menunjukkan bagian atas dari sebuah halaman web.
+2. `<nav>` - digunakan untuk menunjukkan bagian navigasi dari sebuah halaman web.
+3. `<section>` - digunakan untuk menunjukkan bagian utama dari sebuah halaman web.
+4. `<article>` - digunakan untuk menunjukkan bagian artikel dari sebuah halaman web.
+5. `<aside>` - digunakan untuk menunjukkan bagian samping dari sebuah halaman web.
+6. `<footer>` - digunakan untuk menunjukkan bagian bawah dari sebuah halaman web.
+7. `<div>` - digunakan untuk membuat sebuah kotak atau wadah yang dapat diisi dengan elemen HTML lainnya.
+## Jelaskan perbedaan antara margin dan padding.
+### Margin:
+Jarak antara elemen HTML dengan elemen lain di sekitarnya. Margin dapat digunakan untuk memberikan ruang di antara elemen HTML dan elemen lainnya, seperti tepi halaman atau elemen lainnya. Margin dapat diberikan nilai positif atau negatif, dan dapat diberikan nilai untuk setiap sisi elemen (atas, kanan, bawah, kiri).
+
+### Padding: 
+Jarak antara konten elemen HTML dengan tepi elemen tersebut. Padding dapat digunakan untuk memberikan ruang di antara konten elemen HTML dan tepi elemen tersebut. Padding juga dapat diberikan nilai untuk setiap sisi elemen (atas, kanan, bawah, kiri).
+## Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+**Perbedaan**
+- Tailwind CSS membangun tampilan dengan menggabungkan kelas-kelas utilitas yang telah terdefinisi sebelumnya, sedangkan Bootstrap menggunakan gaya dan komponen yang telah terdefinisi dengan tampilan yang siap digunakan secara langsung.
+
+- Tailwind CSS memiliki file CSS yang lebih kecil dibandingkan dengan Bootstrap dan hanya memuat kelas-kelas utilitas yang digunakan dalam proyek, sementara Bootstrap memiliki file CSS yang lebih besar karena termasuk banyak komponen yang telah terdefinisi.
+
+- Tailwind CSS memberikan fleksibilitas dan adaptabilitas tinggi terhadap proyek sehingga memungkinkan untuk merancang tampilan dengan tingkat kustomisasi yang tinggi. Di sisi lain, Bootstrap sering kali menghasilkan tampilan yang konsisten di seluruh proyek karena menggunakan komponen yang telah terdefinisi.
+
+**Kapan Menggunakan Bootstrap atau Tailwind:**
+
+Gunakan Bootstrap Ketika:
+
+- ingin membangun situs web dengan cepat dan dengan sedikit usaha desain.
+- tidak memerlukan kontrol tingkat tinggi dalam desain dan cukup puas dengan tema dan komponen yang telah ada.
+- mengutamakan kestabilan dan dokumentasi yang kuat.
+
+Gunakan Tailwind CSS Ketika:
+
+- ingin memiliki kontrol penuh atas desain Anda dan membuat tampilan yang sangat disesuaikan.
+- ingin menghindari overhead CSS yang tidak digunakan, karena Tailwind hanya menghasilkan kode yang diperlukan.
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+### Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin.
+Dalam `base.html`, saya menambahkan beberapa style untuk kustomisasi tampilan aplikasi saya
+```html
+<style>
+    body {
+        font-family: "Press Start 2P", cursive;
+        font-size: 70%;
+        background-color: #FFFFFF;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 20px;
+        font-family: "Press Start 2P", cursive;
+        font-palette: #3d3c3c;
+        background-color: #FFFFFF;
+        padding: 10px;
+        margin: 10px;
+    }
+
+        .button {
+            background: #7C7C7C;
+            border-bottom: 6px inset rgba(0,0,0,.5);
+            border-left: 6px inset rgba(0,0,0,.5);
+            border-right: 6px inset rgba(255,255,255,.5);
+            border-top: 6px inset rgba(255,255,255,.5);
+            box-sizing: border-box;
+            color: white;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 10px;
+            font-family: "Press Start 2P", cursive;
+            margin: 10px;
+            min-width: 150px;
+            padding: 10px;
+            text-transform: uppercase;
+            width: auto;
+            transition: all 0.2s ease-in-out;
+            
+            &:focus,
+            &:hover {
+    		    background: #BCBCBC;
+            }
+            
+            &:active {
+                transform: translateY(10px);
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 4);
+            }
+        }
+
+        .button.small {
+            font-size: 10px;
+            min-width: 50px;
+            padding: 5px;
+        }
+
+    .input {
+        margin: auto;
+        box-sizing: border-box;
+    }
+    
+    .input label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+    
+    .input input[type=text], input[type=number], input[type=password], input[type=username], textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+        background-color: #9f9f9f;
+    }
+    
+    .form-container {
+        max-width: 300px;
+        width: 100%;
+        padding: 20px;
+        background-color: white;
+        margin: auto;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h5 {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    table, th, td {
+        border: 3px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    .card {
+        margin: auto;
+        width: 90%;
+        padding: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+    }
+
+    li {
+        color: red;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+</style>
+```
+1. `body`: mengatur tampilan pada elemen body, seperti font-family, font-size, dan background-color.
+2. `.title`: mengatur tampilan pada elemen dengan class "title", seperti text-align, font-size, font-family, background-color, padding, dan margin.
+3. `.button`: mengatur tampilan pada elemen dengan class "button", seperti background, border, color, cursor, font-size, font-family, margin, min-width, padding, text-transform, width, dan transition. Pada bagian &:focus, &:hover, dan &:active, mengatur tampilan saat elemen tersebut di-focus, di-hover, dan di-klik.
+4. `.button.small`: mengatur tampilan pada elemen dengan class "button small", seperti font-size, min-width, dan padding.
+5. `.input`: mengatur tampilan pada elemen dengan class "input", seperti margin dan box-sizing.
+6. `.input label`: mengatur tampilan pada elemen label yang berada di dalam elemen dengan class "input", seperti padding dan display.
+7. `.input input[type=text]`, `input[type=number]`, `input[type=password]`, `input[type=username]`, `textarea`: mengatur tampilan pada elemen input dan textarea yang berada di dalam elemen dengan class "input", seperti width, padding, border, box-sizing, margin-top, margin-bottom, resize, dan background-color.
+8. `.form-container`: mengatur tampilan pada elemen dengan class "form-container", seperti max-width, width, padding, background-color, margin, dan box-shadow.
+9. `h5`: mengatur tampilan pada elemen h5, seperti font-size dan font-weight.
+10. `table, th, td`: mengatur tampilan pada elemen table, th, dan td, seperti border, border-collapse, dan padding. Pada elemen th, mengatur tampilan pada text-align.
+11. `.card`: mengatur tampilan pada elemen dengan class "card", seperti margin, width, padding, dan box-shadow.
+12. `ul`: mengatur tampilan pada elemen ul, seperti list-style, margin, padding, dan font-weight.
+13. `li`: mengatur tampilan pada elemen li, seperti color, margin-bottom, dan font-weight.<br>
+
+Kemudian saya mengaplikasikan beberapa style tersebut ke dalam `register.html`, `login.html`, dan `add_item.html` <br>
+Contohnya dalam `add_item.html` adalah sebagai berikut
+```html
+<head>
+    <div class = "title">
+        <h1>Add Item</h1>
+    </div>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-container"> <!--  style form-container -->
+        <div class="input"> <!-- style input -->
+            {{ form.as_table }}
+        </div>
+        <button class="button"> <!-- style button -->
+            Add Item
+        </button>
+    </div>
+</form>
+
+</head>
+```
+
+### Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.
+Dalam `main.html` saya juga mengaplikasikan style yang ada di `base.html`
+```html
+<body>
+    <h5 align="center">Welcome, {{ user.username }}!</h3>
+    <h5 align="center">You have {{ items|length }} item(s) in your inventory</h3>
+    <div class="card"> <!-- Aplikasikan style card -->
+    {% if items %}
+    <table align="center" border="1px" style="width: 80%; line-height:30px;">
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th colspan="2">Edit</th>
+        </tr>
+
+        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.date_added }}</td>
+            <td>        
+                <a href="{% url 'main:change_item_amount' item.id 'increase' %}"><button type="submit" class="button small">+</button></a>
+                <a href="{% url 'main:change_item_amount' item.id 'decrease' %}"><button type="submit" class="button small">-</button></a>
+            </td>
+            <td>
+                <a href="{% url 'main:delete_item' item.id %}"><button type="submit" class="button">Delete</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <br />
+    </div>
+    <div align="center">
+        <a href="{%url 'main:add_item' %}"><button class="button">Add Item</button></a>
+        <a href="{%url 'main:logout' %}"><button class="button">Logout</button></a>
+    </div>
+
+    <div align="center">
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
+    </div>
+</body>
+```
