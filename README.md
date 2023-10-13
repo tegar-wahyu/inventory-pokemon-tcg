@@ -1389,7 +1389,7 @@ Lakukan routing
 path('delete-item-ajax/<int:item_id>/', delete_item_ajax, name='delete_item_ajax'),
 ```
 
-Tambahkan button delete pada tiap baris
+Tambahkan button ``delete`` pada tiap baris
 ```JavaScript
     async function refreshItems() {
         ...
