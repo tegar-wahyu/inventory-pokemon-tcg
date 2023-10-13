@@ -15,4 +15,7 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('change_item_amount/<int:item_id>/<str:amount>/', change_item_amount, name='change_item_amount'),
     path('delete_item/<int:item_id>/', delete_item, name='delete_item'),
+    path('get-items/', get_items_json, name='get_items_json'),
+    path('create-item-ajax/', add_item_ajax, name='add_item_ajax'),
+    path('delete-item-ajax/<int:item_id>/', delete_item_ajax, name='delete_item_ajax'),
 ]

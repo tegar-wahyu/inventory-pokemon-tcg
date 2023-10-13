@@ -9,50 +9,109 @@
     </div>
 </head>
 
+<h5 align="center">Welcome, {{ user.username }}!</h3>
+<h5 align="center">You have {{ items|length }} item(s) in your inventory</h3>
+<!-- Jika tidak ada item, sembunyikan tabel -->
+<div class="card">
+{% if items %}
+<table align="center" border="1px" style="width: 80%; line-height:30px;" id="item_table">
+</table>
+{% endif %}
+<br />
+</div>
 <body>
-    <h5 align="center">Welcome, {{ user.username }}!</h3>
-    <h5 align="center">You have {{ items|length }} item(s) in your inventory</h3>
-    <!-- Jika tidak ada item, sembunyikan tabel -->
-    <div class="card">
-    {% if items %}
-    <table align="center" border="1px" style="width: 80%; line-height:30px;">
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Description</th>
-            <th>Date Added</th>
-            <th colspan="2">Edit</th>
-        </tr>
-
-        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-
-        {% for item in items %}
-        <tr>
-            <td>{{ item.name }}</td>
-            <td>{{ item.amount }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ item.date_added }}</td>
-            <td>        
-                <a href="{% url 'main:change_item_amount' item.id 'increase' %}"><button type="submit" class="button small">+</button></a>
-                <a href="{% url 'main:change_item_amount' item.id 'decrease' %}"><button type="submit" class="button small">-</button></a>
-            </td>
-            <td>
-                <a href="{% url 'main:delete_item' item.id %}"><button type="submit" class="button">Delete</button></a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-    <br />
+    <table id="item_table"></table>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button red" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="button" id="button_add" data-bs-dismiss="modal">Add Item</button>
+                </div>
+            </div>
+        </div>
     </div>
+    <div align="center">
+        <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Item by AJAX</button>  
+    </div>
+
+</body>
     <div align="center">
         <a href="{%url 'main:add_item' %}"><button class="button">Add Item</button></a>
         <a href="{%url 'main:logout' %}"><button class="button">Logout</button></a>
     </div>
+<div align="center">
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+</div>
+<script>
+    async function getItems() {
+        return fetch("{% url 'main:get_items_json' %}").then((res) => res.json())
+    }
 
-    <div align="center">
-        <h5>Sesi terakhir login: {{ last_login }}</h5>
-    </div>
-</body>
+    async function refreshItems() {
+        document.getElementById("item_table").innerHTML = ""
+        const items = await getItems()
+        let htmlString = `<tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th colspan="2">Action</th>
+        </tr>`
+        items.forEach((item) => {
+            htmlString += `\n<tr>
+            <td>${item.fields.name}</td>
+            <td>${item.fields.amount}</td>
+            <td>${item.fields.description}</td>
+            <td>${item.fields.date_added}</td>
+            <td><button class="button small" onclick="deleteItem(${item.pk})">Delete</button></td>   
+        </tr>` 
+        })
+        
+        document.getElementById("item_table").innerHTML = htmlString
+    }
+
+    refreshItems()
+    function addItem() {
+        fetch("{% url 'main:add_item_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshItems)
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+    document.getElementById("button_add").onclick = addItem
+
+    function deleteItem(id) {
+    let url = `/delete-item-ajax/${id}/`;
+        fetch(url, {
+            method: "DELETE",
+            body: JSON.stringify({id: id})
+        }).then(refreshItems);
+    }
+</script>
 </html>
 {% endblock content %}

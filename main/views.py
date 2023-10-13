@@ -1,7 +1,7 @@
 import datetime
 from django.shortcuts import render
 from .models import Item
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from main.forms import ItemForm
 from django.urls import reverse 
 from django.http import HttpResponse 
@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 @login_required(login_url='/login')
 def homepage(request):
@@ -101,3 +102,31 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = Item.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def get_items_json(request):
+    items = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', items))
+
+@csrf_exempt
+def add_item_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_item = Item(name=name, amount=amount, description=description, user=user)
+        new_item.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+
+@csrf_exempt
+def delete_item_ajax(request, item_id):
+    if request.method == 'DELETE':
+        item = Item.objects.get(id=item_id)
+        item.delete()
+        return HttpResponse(b"OK", status=200)
+
+    return HttpResponseNotFound()
