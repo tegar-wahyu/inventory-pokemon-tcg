@@ -1,5 +1,3 @@
-https://red-s-inventory.adaptable.app/
-
 Nama    : Tegar Wahyu Khisbulloh <br>
 NPM     : 2206082032 <br>
 Kelas   : PBP F <br>
